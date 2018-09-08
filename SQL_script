@@ -1,0 +1,6 @@
+create table PVB_list (
+id int identity primary key,
+verb varchar(300) not null,
+definition varchar(300) not null,
+example varchar(300) not null,
+)
