@@ -8,6 +8,10 @@ class PVB_loader():
         except FileNotFoundError:
             print ("Brak pliku na pulpicie!")
 
+        self.create_table()
+        self.load_verbs()
+        self.file.close()
+
     def CONNECTION(self):
         con = pyodbc.connect("Driver={SQL Server};"
                                "Server=DESKTOP-UPREPSE\KSERVER;"
@@ -15,45 +19,36 @@ class PVB_loader():
                                "Trusted_Connection=yes;")
         return con
 
+    def create_table(self):
+        db = self.CONNECTION()
+        sql = """Begin tran commit tran
+                 create table PVB_list (
+                 id int identity primary key,
+                 verb varchar(300) not null,
+                 definition varchar(300) not null,
+                 example varchar(300) not null,)
+                 COMMIT TRANSACTION
+                 """
+        try:
+            db.execute(sql)
+            print("Table PVB_list created succesfully...")
+        except pyodbc.ProgrammingError:
+            print("This table already exists!")
+
+        db.close
+
     def load_verbs(self):
 
-
         for lines in self.file:
-            verb = ""
-            definition = ""
-            example = ""
-            position = 0
-            for i in lines:
-                if i =="|":
-                    break
-                else:
-                    verb+=i
-                    position+=1
-            lines2 = lines[position+1:]
-            for i in lines2:
-                if i =="|":
-                    break
-                else:
-                    definition+=i
-                    position+=1
-            lines3 = lines[position + 2:]
-            for i in lines3:
-                example += i
-
-
-
-
-
+            row = lines.split('|')
+            verb = row[0]
+            definition = row[1]
+            example = row[2].rstrip("\n")
             db = self.CONNECTION()
             sql = str("Begin tran commit tran INSERT INTO PVB_list (verb,definition,example) VALUES ('{}','{}','{}')  COMMIT TRANSACTION".format(verb,definition,example))
-            print(sql)
             db.execute(sql)
             db.close
+        print('Rows loaded succesfully...')
 
-
-
-
-        self.file.close()
 
 first_loader = PVB_loader()
-first_loader.load_verbs()
