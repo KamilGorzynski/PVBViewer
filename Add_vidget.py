@@ -36,10 +36,10 @@ class Add_viget(SQL_Handler.SQL_Handler):
 
         # buttons
         self.clear_button = Button(self.root, text="CLEAR ALL", height=2, width=12, font=('Rockwell', 12, 'bold'),
-                                 bg="#b300b3", fg="white",command = self.clear_all)
+                                 bg="#b300b3", fg="white",command = self.clear_all,cursor = "hand2")
 
         self.add_button = Button(self.root, text="ADD NEW!", height=2, width=12, font=('Rockwell', 12, 'bold'),
-                                    bg="#b300b3",fg="white",command = self.add_new)
+                                    bg="#b300b3",fg="white",command = self.add_new,cursor = "hand2")
 
 
         # footer

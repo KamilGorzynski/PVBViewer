@@ -1,5 +1,5 @@
 from tkinter import *
-import pyodbc,SQL_Handler,Challenge_viget
+import pyodbc,SQL_Handler
 
 
 class Random_viget(SQL_Handler.SQL_Handler):
@@ -45,7 +45,7 @@ class Random_viget(SQL_Handler.SQL_Handler):
 
         #buttons
         self.random_button = Button(self.root, text = "RANDOM",height=2,width=12,font=('Rockwell', 12, 'bold'),bg = "#b300b3",
-                                    fg = "white",command = self.display_random_phrasal_verb)
+                                    fg = "white",command = self.display_random_phrasal_verb,cursor = "hand2")
 
 
 

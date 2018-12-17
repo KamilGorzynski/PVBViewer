@@ -1,5 +1,5 @@
 from tkinter import *
-import pyodbc,Random_viget,Browse_viget,Add_vidget,Challenge_viget
+import Random_viget,Browse_viget,Add_vidget,Challenge_viget
 
 class Welcome_vidget(object):
     def __init__(self):
@@ -23,6 +23,7 @@ class Welcome_vidget(object):
         self.browse = PhotoImage(file="C:\\Users\\Admin\\PycharmProjects\\PVBViever\\icons\\find.png",width="128",height="128")
         self.add = PhotoImage(file="C:\\Users\\Admin\\PycharmProjects\\PVBViever\\icons\\add.png",width="128",height="128")
         self.challenge = PhotoImage(file="C:\\Users\\Admin\\PycharmProjects\\PVBViever\\icons\\challenge.png", width="128",height="128")
+        self.question_mark_photo = PhotoImage(file="C:\\Users\\Admin\\PycharmProjects\\PVBViever\\icons\\question_mark.png", width="128", height="128")
 
         #high labels
         self.Random_label = Label (self.root, text = "Random",font=('Rockwell', 22, 'bold'), bg="white")
@@ -31,10 +32,10 @@ class Welcome_vidget(object):
         self.Challenge_label = Label (self.root, text = "Challenge",font=('Rockwell', 22, 'bold'), bg="white")
 
         #buttons
-        self.Random_button = Button (self.root,image = self.random,bg = "white", command = self.rise_random_vidget)
-        self.Browse_button = Button(self.root, image = self.browse,bg = "white",command = self.rise_browse_vidget)
-        self.Add_button = Button(self.root,image = self.add,bg = "white",command = self.rise_add_vidget)
-        self.Challenge_button = Button(self.root,image = self.challenge,bg = "white",command = self.rise_challenge_vidget)
+        self.Random_button = Button (self.root,image = self.random,bg = "white", command = self.rise_random_vidget,cursor = "hand2")
+        self.Browse_button = Button(self.root, image = self.browse,bg = "white",command = self.rise_browse_vidget,cursor = "hand2")
+        self.Add_button = Button(self.root,image = self.add,bg = "white",command = self.rise_add_vidget,cursor = "hand2")
+        self.Challenge_button = Button(self.root,image = self.challenge,bg = "white",command = self.rise_challenge_vidget,cursor = "hand2")
 
         #low labels
 

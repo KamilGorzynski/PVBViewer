@@ -11,7 +11,7 @@ class SQL_Handler(object):
                                  "Trusted_Connection=yes;")
 
         except pyodbc.ProgrammingError:
-            messagebox.showinfo(title="Warning", message="Cannot find the table!")
+            messagebox.showinfo(title="Warning", message="No connection with data base!")
 
         else:
             return con
@@ -58,11 +58,40 @@ class SQL_Handler(object):
             messagebox.showinfo(title="Warning", message="Cannot find the table!")
         db.close()
 
-    """
-    def funkcja pytajaca(self):
-        select * from PVB_list WHERE verb like 'get%' --starts like
+    def sql_option(self,cb_value,entry):        #function chooses query depends on value from combobox
+        if cb_value == 'Equals':
+            sql = "select * from PVB_list WHERE verb = '{}'".format(entry)
+            return sql
+        elif cb_value == 'Starts like':
+            sql = "select * from PVB_list WHERE verb like '{}%'".format(entry)
+            return sql
+        elif cb_value == 'Contains':
+            sql = "select * from PVB_list WHERE verb like '%{}%'".format(entry)
+            return sql
+        elif cb_value == 'Ends like':
+            sql = "select * from PVB_list WHERE verb like '%{}'".format(entry)
+            return sql
+        else:
+            messagebox.showinfo(title="Warning!",message="Unknown value from combobox!")
 
-        select * from PVB_list WHERE verb like '%away%' -- contain
+    def get_phrasal_list(self,sql):
+        message = ""
+        db = self.CONNECTION()
+        cursor = db.cursor()
+        cursor.execute(sql)
+        for row in cursor:
+            verb = row[1]
+            definition = row[2]
+            example = row[3]
+            message += "\t\t\t###{}###\n".format(verb)
+            message += "\t\t\t\tDefinition:\n"
+            message += "{}\n".format(definition)
+            message += "\t\t\t\tExample:\n"
+            message += "{}\n\n\n".format(example)
+        db.close
+        return message
 
-        select * from PVB_list WHERE verb like '%away' -- ends like
-    """
+
+
+
+
